@@ -12,11 +12,15 @@ module.exports = {
 	plugins: ['prettier'],
 	extends: [
 		'plugin:vue/vue3-recommended',
+		'plugin:vue-pug/vue3-recommended',
 		'plugin:@typescript-eslint/recommended',
-		'plugin:prettier/recommended'
+		'plugin:prettier/recommended',
+		'@vue/eslint-config-typescript',
+		'@vue/eslint-config-prettier'
 	],
 
 	rules: {
-		'prettier/prettier': 'error'
+		'prettier/prettier': 'error',
+		'vue/v-on-event-hyphenation': 'never'
 	}
 }
