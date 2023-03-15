@@ -22,26 +22,36 @@ div(class="flex h-full flex-col items-center justify-center p-4 md:p-8")
       v-model="description")
   div(v-if="!isShowingDetail" class="flex gap-4 px-8 py-8 md:px-16")
     button(
-      class="box-border rounded-3xl bg-slate-500 px-8 py-2 text-slate-200"
+      class="box-border rounded-3xl bg-slate-500 px-8 py-2 text-slate-200 hover:bg-slate-500 active:bg-slate-600"
       @click="leftBtn?.callback") {{ leftBtn?.text }}
     button(
-      class="box-border rounded-3xl bg-slate-500 px-8 py-2 text-slate-200"
+      class="box-border rounded-3xl bg-blue-400 px-8 py-2 text-slate-200 hover:bg-blue-500 active:bg-blue-600"
       @click="rightBtn?.callback") {{ rightBtn?.text }}
+  div(v-if="isShowingDetail" class="flex gap-4 px-8 py-8 md:px-16")
+    button(
+      class="box-border rounded-3xl bg-red-500 px-8 py-2 text-slate-200 hover:bg-slate-500 active:bg-slate-600"
+      @click="deleteCurrBook()") {{ '刪除' }}
 </template>
 
 <script lang="ts" setup>
-import useBooks from '@/composable/useBooks';
-import useState from '@/composable/useState';
-import type { IBook } from '@/interface';
-import { computed, onMounted, ref } from 'vue';
+import useBooks from '@/composable/useBooks'
+import useState from '@/composable/useState'
+import type { IBook } from '@/interface'
+import { notify } from '@kyvg/vue3-notification'
+import { computed, onMounted, ref } from 'vue'
 const props = defineProps<{
   book?: IBook
 }>()
 const { book } = props
 
 const { isShowingDetail, isAddingBook, isEditingBook, setState } = useState()
-const { addBook, patchBook } = useBooks()
+const { addBook, patchBook, deleteBook } = useBooks()
 
+const deleteCurrBook = async () => {
+  await deleteBook(book!.id)
+
+  setState('listing')
+}
 const title = ref('')
 
 const author = ref('')
@@ -51,12 +61,20 @@ const description = ref('')
 const rightBtn = computed(() => {
   if (isAddingBook.value) {
     return {
-      callback: () => {
+      callback: async () => {
         if (title.value !== '' && author.value !== '') {
-          addBook({
+          await addBook({
             title: title.value,
             author: author.value,
             description: description.value
+          })
+          title.value = ''
+          author.value = ''
+          description.value = ''
+        } else {
+          notify({
+            text: '書名跟作者都需有值!',
+            group: 'error'
           })
         }
       },
@@ -74,7 +92,10 @@ const rightBtn = computed(() => {
             description: description.value
           })
         } else {
-          console.log('error')
+          notify({
+            text: '書名跟作者都需有值!',
+            group: 'error'
+          })
         }
       },
       text: '修改'
@@ -87,7 +108,6 @@ const leftBtn = computed(() => {
     return {
       callback: () => {
         setState('listing')
-        console.log('hihi')
       },
       text: '取消'
     }
@@ -97,17 +117,25 @@ const leftBtn = computed(() => {
     return {
       callback: () => {
         setState('showingDetail')
-        console.log('sadsd')
       },
       text: '取消'
     }
   }
 })
 onMounted(() => {
-  if (book) {
-    title.value = book.title
-    author.value = book.author
-    description.value = book.description
+  if (isShowingDetail) {
+    if (book) {
+      title.value = book.title
+      author.value = book.author
+      description.value = book.description
+    } else {
+      notify({
+        text: '沒有書籍資料!',
+        group: 'error'
+      })
+
+      setState('listing')
+    }
   }
 })
 </script>

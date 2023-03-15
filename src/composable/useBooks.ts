@@ -1,4 +1,5 @@
 import type { BooksMap, IBook } from '@/interface'
+import { notify } from '@kyvg/vue3-notification'
 import { computed, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -46,6 +47,10 @@ const useBooks = () => {
 
       return data
     } catch (error) {
+      notify({
+        group: 'error',
+        text: '取得書本失敗'
+      })
       console.error(error)
     }
   }
@@ -67,8 +72,16 @@ const useBooks = () => {
       const targetIndex = booksMap.get(`${data.id}`)?.index
       books[targetIndex!] = data
       booksMap.set(`${data.id}`, { ...data, index: targetIndex })
+      notify({
+        group: 'success',
+        text: '更新成功'
+      })
     } catch (error) {
       console.error(error)
+      notify({
+        group: 'error',
+        text: '更新失敗'
+      })
     }
   }
 
@@ -90,20 +103,38 @@ const useBooks = () => {
 
       books.push(data)
       booksMap.set(`${data.id}`, { ...data, index: books.length - 1 })
-      return data
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
-  const deleteBook = async (id: string) => {
-    try {
-      const data = await fetchJson(`${BASE_URL}${id}`, {
-        method: 'DELETE'
+      notify({
+        group: 'success',
+        text: '加入新書成功'
       })
       return data
     } catch (error) {
       console.error(error)
+      notify({
+        group: 'error',
+        text: '加入新書失敗'
+      })
+    }
+  }
+
+  const deleteBook = async (id: string | number) => {
+    try {
+      const data = await fetchJson(`${BASE_URL}${id}`, {
+        method: 'DELETE'
+      })
+
+      notify({
+        group: 'success',
+        text: '刪除書本成功'
+      })
+      return data
+    } catch (error) {
+      console.error(error)
+      notify({
+        group: 'error',
+        text: '刪除書本失敗'
+      })
     }
   }
 

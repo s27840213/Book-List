@@ -14,6 +14,20 @@ div(class="flex h-full flex-col overflow-y-scroll")
       class="absolute top-1/2 right-4 w-12 -translate-y-1/2 cursor-pointer"
       :src="isShowingDetail ? editIcon : plusIcon")
   router-view
+  notifications(
+    position="bottom center"
+    group="success"
+    width="300px"
+    :max="2"
+    :duration="2000")
+  notifications(
+    position="bottom center"
+    group="error"
+    width="300px"
+    :max="2"
+    :duration="2000")
+    template(v-slot:body="{ item }")
+      div(class="bg-red-500 py-2 pl-4 text-left text-white" v-html="item.text")
 </template>
 
 <script setup lang="ts">
@@ -74,6 +88,12 @@ watch(currentPath, (newVal) => {
     setState('listing')
   } else {
     setState('showingDetail')
+  }
+})
+
+watch(currentState, (newVal) => {
+  if (newVal === 'listing') {
+    goToBookList()
   }
 })
 
