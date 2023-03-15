@@ -7,6 +7,7 @@ book-form(v-else-if="isAddingBook")
 </template>
 
 <script lang="ts" setup>
+import BookCard from '@/components/BookCard.vue'
 import BookForm from '@/components/BookForm.vue'
 import useBooks from '@/composable/useBooks'
 import useState from '@/composable/useState'

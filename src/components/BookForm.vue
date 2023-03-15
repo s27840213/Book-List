@@ -123,7 +123,7 @@ const leftBtn = computed(() => {
   }
 })
 onMounted(() => {
-  if (isShowingDetail) {
+  if (isShowingDetail.value) {
     if (book) {
       title.value = book.title
       author.value = book.author
