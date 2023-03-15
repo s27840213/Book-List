@@ -17,8 +17,8 @@ div(class="flex h-full flex-col items-center justify-center p-4 md:p-8")
   div(class="container-style")
     span(class="placeholder-style -translate-y- top-1 text-xs") 備註
     textarea(
-      class="input-style min-h-[240px] rounded-xl"
-      :class="{ 'pointer-events-none': isShowingDetail }"
+      class="input-style min-h-[240px] rounded-xl disabled:bg-slate-100"
+      :disabled="isShowingDetail"
       v-model="description")
   div(v-if="!isShowingDetail" class="flex gap-4 px-8 py-8 md:px-16")
     button(
