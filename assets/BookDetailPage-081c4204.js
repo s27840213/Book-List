@@ -1,0 +1,1 @@
+import{_ as s}from"./BookForm-8e9fef15.js";import{d as a,e as c,c as _,u as r,o as p}from"./index-faf46705.js";const i=a({__name:"BookDetailPage",setup(u){const{activeBookId:o,booksMap:e}=c(),n=e.get(o.value);return(k,m)=>{const t=s;return p(),_(t,{book:r(n)},null,8,["book"])}}});export{i as default};
