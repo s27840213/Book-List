@@ -3,11 +3,19 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
+    name: 'BookList',
     meta: {
-      title: '首页'
+      title: '書籍列表'
     },
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/BookList.vue')
+  },
+  {
+    path: '/:bookId',
+    name: 'BookItem',
+    meta: {
+      title: '書本詳情'
+    },
+    component: () => import('@/views/BookDetailPage.vue')
   }
 ]
 

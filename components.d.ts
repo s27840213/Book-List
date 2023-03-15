@@ -9,7 +9,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    BookCard: typeof import('./src/components/BookCard.vue')['default']
+    BookForm: typeof import('./src/components/BookForm.vue')['default']
+    BookInfo: typeof import('./src/components/BookInfo.vue')['default']
+    LazyLoad: typeof import('./src/components/LazyLoad.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

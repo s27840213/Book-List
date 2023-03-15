@@ -23,6 +23,6 @@ module.exports = {
 	pugAttributeSeparator: 'none',
 	pugClassNotation: 'attribute',
 	pugFramework: 'vue',
-	plugins: ['@prettier/plugin-pug'],
+	plugins: ['@prettier/plugin-pug', 'prettier-plugin-tailwindcss'],
 	pugBracketSameLine: true
 }
