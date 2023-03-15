@@ -1,12 +1,6 @@
 <!-- ABOUT THE PROJECT -->
 # Book List
-### Project Requirement
-1. Based on the information provided an expandable/collapsible elements component
-2. Each item can be clicked, and when clicked, highlight the clicked item, and if the item has sub elements, open the menu of the item.
-3. There is only one expanded and highlighted item at a time.
-4. A drop-down menu is also provided, which must contain all categories. Selecting any item from the drop-down menu is the same action as clicking on that item.
 
-<!-- GETTING STARTED -->
 ### How to run the project?
 * Pay attention to the **NodeJS version**. My NodeJS version is v16.19.1. If you're using the different version of NodeJS, maybe you will get some problems when executing the project locally.
   * My NodeJs version: v16.19.1
