@@ -1,0 +1,1 @@
+import{B as t}from"./BookForm-7344f7bc.js";import{d as s,e as r,c as n,u as c,o as k}from"./index-caad8e69.js";const l=s({__name:"BookDetailPage",setup(u){const{activeBookId:o,booksMap:e}=r(),a=e.get(o.value);return(p,m)=>(k(),n(t,{book:c(a)},null,8,["book"]))}});export{l as default};
